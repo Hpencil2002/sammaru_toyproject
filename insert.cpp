@@ -26,20 +26,28 @@ void init(telePointer node) {
 }
 
 int main() {
-	telephone* tele = NULL;
+	telePointer tele;
+	tele = new telephone;
 	init(tele);
 	string t_name, t_number;
 
 	while (1) {
-		cout << "ÀÌ¸§, ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä(ÀÌ¸§ÀÌ³ª ¹øÈ£¿¡ 0À» ÀÔ·ÂÇÏ¸é Á¾·á)";
+		cout << "ì´ë¦„, ë²ˆí˜¸ë¥¼ ìž…ë ¥í•˜ì„¸ìš”(ì´ë¦„ì´ë‚˜ ë²ˆí˜¸ì— 0ì„ ìž…ë ¥í•˜ë©´ ì¢…ë£Œ)\n";
+		cout << "ì´ë¦„: ";
 		getline(cin, t_name);
-		getline(cin, t_number);
-		if (t_name == "0" || t_number == "0")
+		if (t_name == "0")
 			break;
+		cout << "ì „í™”ë²ˆí˜¸: ";
+		getline(cin, t_number);
+		if (t_number == "0")
+			break;
+		cout << "\n";
 
 		telePointer Newnode = NULL;
-		telePointer temp = tele;
+		telePointer temp = NULL;
+		temp = new telephone;
 		Newnode = new telephone;
+		temp = tele;
 		Newnode->name = t_name;
 		Newnode->number = t_number;
 		Newnode->left = NULL;
@@ -51,20 +59,31 @@ int main() {
 				tele->number = Newnode->number;
 				break;
 			}
-			else if (Newnode->name > temp->name && Newnode->name < temp->right->name) {
+			else if ((Newnode->name) > (temp->name) && (temp->right) != NULL) {
 				insert(temp, Newnode);
 				break;
 			}
-			else if (Newnode->name > temp->name && temp->right == NULL) {
+			else if ((Newnode->name) > (temp->name) && (temp->right) == NULL) {
 				Newnode->left = temp;
 				temp->right = Newnode;
 				break;
 			}
-			else if (Newnode->name > temp->name && Newnode->name > temp->right->name) {
+			else if ((Newnode->name) > (temp->right->name)) {
 				temp = temp->right;
+			}
+			else if ((Newnode->name) < (temp->name)) {
+				Newnode->right = tele;
+				tele->left = Newnode;
+				break;
 			}
 		} while (1);
 	}
+
+	cout << "\n";
+	do {
+		cout << "ì´ë¦„: " << tele->name << "\t" << "ì „í™”ë²ˆí˜¸: " << tele->number << "\n";
+		tele = tele->right;
+	} while (tele->right != NULL);
 
 	return 0;
 }
