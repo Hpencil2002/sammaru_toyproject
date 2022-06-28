@@ -44,10 +44,9 @@ int main() {
 		cout << "\n";
 
 		telePointer Newnode = NULL;
-		telePointer temp = NULL;
-		temp = new telephone;
+		telePointer temp = tele;
+
 		Newnode = new telephone;
-		temp = tele;
 		Newnode->name = t_name;
 		Newnode->number = t_number;
 		Newnode->left = NULL;
@@ -55,8 +54,8 @@ int main() {
 
 		do {
 			if (temp->name == " ") {
-				tele->name = Newnode->name;
-				tele->number = Newnode->number;
+				temp->name = Newnode->name;
+				temp->number = Newnode->number;
 				break;
 			}
 			else if ((Newnode->name) > (temp->name) && (temp->right) != NULL) {
@@ -72,8 +71,8 @@ int main() {
 				temp = temp->right;
 			}
 			else if ((Newnode->name) < (temp->name)) {
-				Newnode->right = tele;
-				tele->left = Newnode;
+				Newnode->right = temp;
+				temp->left = Newnode;
 				break;
 			}
 		} while (1);
@@ -83,7 +82,7 @@ int main() {
 	do {
 		cout << "이름: " << tele->name << "\t" << "전화번호: " << tele->number << "\n";
 		tele = tele->right;
-	} while (tele->right != NULL);
+	} while (tele != NULL);
 
 	return 0;
 }
