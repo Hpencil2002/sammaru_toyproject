@@ -52,30 +52,37 @@ int main() {
 		Newnode->left = NULL;
 		Newnode->right = NULL;
 
-		do {
-			if (temp->name == " ") {
-				temp->name = Newnode->name;
-				temp->number = Newnode->number;
+		while(1) {
+			if (tele->name == " ") {
+				tele->name = Newnode->name;
+				tele->number = Newnode->number;
 				break;
 			}
-			else if ((Newnode->name) > (temp->name) && (temp->right) != NULL) {
-				insert(temp, Newnode);
+
+			if (Newnode->name < tele->name) {
+				tele->left = Newnode;
+				Newnode->right = tele;
+				tele = Newnode;
 				break;
 			}
-			else if ((Newnode->name) > (temp->name) && (temp->right) == NULL) {
-				Newnode->left = temp;
-				temp->right = Newnode;
-				break;
+			else {
+				if (temp->right != NULL)
+					temp = temp->right;
+
+				if (Newnode->name > temp->name && temp->right == NULL) {
+					Newnode->left = temp;
+					temp->right = Newnode;
+					break;
+				}
+				else if (Newnode->name > temp->name && temp->right != NULL) {
+					temp = temp->right;
+				}
+				else {
+					insert(temp->left, Newnode);
+					break;
+				}
 			}
-			else if ((Newnode->name) > (temp->right->name)) {
-				temp = temp->right;
-			}
-			else if ((Newnode->name) < (temp->name)) {
-				Newnode->right = temp;
-				temp->left = Newnode;
-				break;
-			}
-		} while (1);
+		}
 	}
 
 	cout << "\n";
