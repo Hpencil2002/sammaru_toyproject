@@ -22,7 +22,8 @@ void telephone::printMenu() {
 	cout << "3. 삭제" << endl;
 	cout << "4. 출력" << endl;
 	cout << "5. 전체 삭제" << endl;
-	cout << "6. 종료" << endl;
+	cout << "6. 수정" << endl;
+	cout << "7. 종료" << endl;
 	cout << "==========================" << endl;
 	cout << "Menu : ";
 }
@@ -38,16 +39,16 @@ telephone telephone::createNode() {
 	return newNode;
 }
 
-void telephone::delete_member(string name) {
-	if (this->right == NULL) {
+void telephone::delete_member(telepointer h, string name) {
+	if (h->right == NULL) {
 		cout << "삭제할 전화번호가 없습니다.\n";
 		return;
 	}
-	telepointer n = this->right;
+	telepointer n = h->right;
 	while (n != NULL) {
 		if (n->name == name) {
-			if (n == this->right) {
-				this->right = n->right;
+			if (n == h->right) {
+				h->right = n->right;
 				free(n);
 			}
 			else if (n->right == NULL) {
@@ -91,18 +92,18 @@ telepointer telephone::searchNode(string name) {
 	return NULL;
 }
 
-void telephone::insertNode(string name, string number) {
+void telephone::insertNode(telepointer h, string name, string number) {
 	telepointer newnode = new telephone;
 	newnode->left = NULL;
 	newnode->right = NULL;
 	newnode->name = name;
 	newnode->number = number;
 
-	telepointer n = this->right;
+	telepointer n = h->right;
 
-	if (this->right == NULL) {
-		this->right = newnode;
-		newnode->left = this;
+	if (h->right == NULL) {
+		h->right = newnode;
+		newnode->left = h;
 		return;
 	}
 
@@ -126,13 +127,48 @@ void telephone::insertNode(string name, string number) {
 
 void telephone::show_member() {
 	telepointer n = this->right;
+	cout << "=================================" << endl;
 	while (n) {
-		cout << "=================================" << endl;
 		cout << "이름: ";
 		cout.width(15);
 		cout.setf(ios_base::left);
 		cout << n->name << "전화번호: " << n->number << endl;
-		cout << "=================================" << endl;
 		n = n->right;
+	}
+	cout << "=================================" << endl;
+}
+
+void telephone::modify(telepointer h) {
+	string menu;
+	cout << "수정하고 싶은 부분을 입력하세요: ";
+	getline(cin, menu);
+
+	if (menu == "이름") {
+		string old_name, new_name, new_number;
+		cout << "바꿀 이름을 입력하세요: ";
+		getline(cin, new_name);
+		old_name = this->name;
+		new_number = this->number;
+		delete_member(h, old_name);
+		insertNode(h, new_name, new_number);
+	}
+	else if (menu == "전화번호") {
+		string new_number;
+		cout << "바꿀 번호를 입력하세요: ";
+		getline(cin, new_number);
+		this->number = new_number;
+	}
+	else if (menu == "모두") {
+		string old_name, new_name, new_number;
+		cout << "바꿀 이름을 입력하세요: ";
+		getline(cin, new_name);
+		cout << "바꿀 번호를 입력하세요: ";
+		getline(cin, new_number);
+		old_name = this->name;
+		delete_member(h, old_name);
+		insertNode(h, new_name, new_number);
+	}
+	else {
+		cout << "잘못된 메뉴입니다.\n";
 	}
 }
