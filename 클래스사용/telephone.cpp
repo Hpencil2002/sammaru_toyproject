@@ -17,12 +17,12 @@ telephone::~telephone() {
 void telephone::printMenu() {
 	cout << "\n";
 	cout << "===========Menu===========" << endl;
-	cout << "1. Ãß°¡" << endl;
-	cout << "2. °Ë»ö" << endl;
-	cout << "3. »èÁ¦" << endl;
-	cout << "4. Ãâ·Â" << endl;
-	cout << "5. ÀüÃ¼ »èÁ¦" << endl;
-	cout << "6. Á¾·á" << endl;
+	cout << "1. ì¶”ê°€" << endl;
+	cout << "2. ê²€ìƒ‰" << endl;
+	cout << "3. ì‚­ì œ" << endl;
+	cout << "4. ì¶œë ¥" << endl;
+	cout << "5. ì „ì²´ ì‚­ì œ" << endl;
+	cout << "6. ì¢…ë£Œ" << endl;
 	cout << "==========================" << endl;
 	cout << "Menu : ";
 }
@@ -40,7 +40,7 @@ telephone telephone::createNode() {
 
 void telephone::delete_member(string name) {
 	if (this->right == NULL) {
-		cout << "»èÁ¦ÇÒ ÀüÈ­¹øÈ£°¡ ¾ø½À´Ï´Ù.\n";
+		cout << "ì‚­ì œí•  ì „í™”ë²ˆí˜¸ê°€ ì—†ìŠµë‹ˆë‹¤.\n";
 		return;
 	}
 	telepointer n = this->right;
@@ -64,7 +64,7 @@ void telephone::delete_member(string name) {
 		n = n->right;
 	}
 
-	cout << "ÇØ´ç ÀüÈ­¹øÈ£¸¦ Ã£Áö ¸øÇß½À´Ï´Ù. (" << name << ")\n";
+	cout << "í•´ë‹¹ ì „í™”ë²ˆí˜¸ë¥¼ ì°¾ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. (" << name << ")\n";
 	return;
 }
 
@@ -73,10 +73,10 @@ void telephone::delete_all() {
 	telepointer trail;
 	while (p) {
 		trail = p;
-		p = p->left;
-		free(trail);
+		p = p->right;
+		delete trail;
 	}
-	free(this);
+	this->right = NULL;
 }
 
 telepointer telephone::searchNode(string name) {
@@ -125,9 +125,14 @@ void telephone::insertNode(string name, string number) {
 }
 
 void telephone::show_member() {
-	telepointer n = this;
-	do {
-		cout << "ÀÌ¸§: " << n->name << "\t" << "ÀüÈ­¹øÈ£: " << n->number << "\n";
+	telepointer n = this->right;
+	while (n) {
+		cout << "=================================" << endl;
+		cout << "ì´ë¦„: ";
+		cout.width(15);
+		cout.setf(ios_base::left);
+		cout << n->name << "ì „í™”ë²ˆí˜¸: " << n->number << endl;
+		cout << "=================================" << endl;
 		n = n->right;
-	} while (n != NULL);
+	}
 }
