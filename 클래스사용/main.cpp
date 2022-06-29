@@ -20,30 +20,31 @@ int main() {
 
 		switch (menu) {
 		case 1:
-			cout << "\n\n" << "ÀÌ¸§: ";
+			cout << "\n\n" << "ì´ë¦„: ";
 			cin >> t_name;
-			cout << "ÀüÈ­¹øÈ£: ";
+			cout << "ì „í™”ë²ˆí˜¸: ";
 			cin >> t_number;
 			h->insertNode(t_name, t_number);
 			break;
 		case 2:
-			cout << "Ã£À» ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä: ";
+			cout << "ì°¾ì„ ì´ë¦„ì„ ìž…ë ¥í•˜ì„¸ìš”: ";
 			getline(cin, SearchName);
 			SearchResult = h->searchNode(SearchName);
 			if (SearchResult) {
 				cout << "=================================" << endl;
-				cout.width(18);
+				cout << "ì´ë¦„: ";
+				cout.width(15);
 				cout.setf(ios_base::left);
-				cout << SearchResult->name << SearchResult->number << endl;
+				cout << SearchResult->name << "ì „í™”ë²ˆí˜¸: " << SearchResult->number << endl;
 				cout << "=================================" << endl;
 			}
 			else {
-				cout << "°á°ú ¾øÀ½" << endl;
+				cout << "ê²°ê³¼ ì—†ìŒ" << endl;
 				cout << "\n\n";
 			}
 			break;
 		case 3:
-			cout << "»èÁ¦ÇÒ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä: ";
+			cout << "ì‚­ì œí•  ì´ë¦„ì„ ìž…ë ¥í•˜ì„¸ìš”: ";
 			cin >> t_name;
 			h->delete_member(t_name);
 			break;
@@ -54,10 +55,13 @@ int main() {
 			h->delete_all();
 			break;
 		case 6:
-			cout << "ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.\n";
+			cout << "í”„ë¡œê·¸ëž¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.\n";
 			break;
 		}
 	} while (menu != 6);
+
+	h->delete_all();
+
 
 	return 0;
 }
