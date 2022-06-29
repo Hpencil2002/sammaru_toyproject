@@ -24,7 +24,7 @@ int main() {
 			cin >> t_name;
 			cout << "전화번호: ";
 			cin >> t_number;
-			h->insertNode(t_name, t_number);
+			h->insertNode(h, t_name, t_number);
 			break;
 		case 2:
 			cout << "찾을 이름을 입력하세요: ";
@@ -46,7 +46,7 @@ int main() {
 		case 3:
 			cout << "삭제할 이름을 입력하세요: ";
 			cin >> t_name;
-			h->delete_member(t_name);
+			h->delete_member(h, t_name);
 			break;
 		case 4:
 			h->show_member();
@@ -55,10 +55,22 @@ int main() {
 			h->delete_all();
 			break;
 		case 6:
+			cout << "\n찾을 이름을 입력하세요: ";
+			getline(cin, SearchName);
+			SearchResult = h->searchNode(SearchName);
+			if (SearchResult) {
+				SearchResult->modify(h);
+			}
+			else {
+				cout << "결과 없음" << endl;
+				cout << "\n\n";
+			}
+			break;
+		case 7:
 			cout << "프로그램을 종료합니다.\n";
 			break;
 		}
-	} while (menu != 6);
+	} while (menu != 7);
 
 	h->delete_all();
 
