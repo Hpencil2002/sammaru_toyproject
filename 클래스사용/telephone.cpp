@@ -8,6 +8,7 @@ telephone::telephone() {
 	left = NULL;
 	name = " ";
 	number = " ";
+	star=false;
 	right = NULL;
 }
 
@@ -23,7 +24,8 @@ void telephone::printMenu() {
 	cout << "4. 출력" << endl;
 	cout << "5. 전체 삭제" << endl;
 	cout << "6. 수정" << endl;
-	cout << "7. 종료" << endl;
+	cout << "7. 즐겨찾기" << endl;
+	cout << "8. 종료" << endl;
 	cout << "==========================" << endl;
 	cout << "Menu : ";
 }
@@ -171,4 +173,37 @@ void telephone::modify(telepointer h) {
 	else {
 		cout << "잘못된 메뉴입니다.\n";
 	}
+}
+
+void telephone::add_Favorites() {
+	string s_name;
+	telepointer p;
+	cout << "즐겨찾기에 추가할 이름: ";
+	cin >> s_name;
+	p=searchNode(s_name);
+	p->star = true;
+}
+void telephone::delete_Favorites() {
+	string s_name;
+	telepointer p;
+	cout << "즐겨찾기에서 삭제할 이름: ";
+	cin >> s_name;
+	p = searchNode(s_name);
+	p->star = false;
+}
+void telephone::print_Favorites() {
+	telepointer n = this->right;
+	cout << "=================================" << endl;
+	cout << "\t즐겨찾기 목록\n";
+	cout << "=================================" << endl;
+	while (n) {
+		if (n->star == true) {
+			cout << "이름: ";
+			cout.width(15);
+			cout.setf(ios_base::left);
+			cout << n->name << "전화번호: " << n->number << endl;
+		}
+		n = n->right;
+	}
+	cout << "=================================" << endl;
 }
