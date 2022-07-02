@@ -12,7 +12,7 @@ int main() {
 	string SearchName;
 	telepointer SearchResult;
 
-	int menu;
+	int menu, f_menu;
 	do {
 		h->printMenu();
 		cin >> menu;
@@ -20,7 +20,7 @@ int main() {
 
 		switch (menu) {
 		case 1:
-			cout << "\n\n" << "이름: ";
+			cout << "\n" << "이름: ";
 			cin >> t_name;
 			cout << "전화번호: ";
 			cin >> t_number;
@@ -67,10 +67,23 @@ int main() {
 			}
 			break;
 		case 7:
+			cout << "1. 추가\n";
+			cout << "2. 삭제\n";
+			cout << "3. 출력\n";
+			cout << "즐겨찾기 메뉴: ";
+			cin >> f_menu;
+			if (f_menu == 1)
+				h->add_Favorites();
+			else if (f_menu == 2)
+				h->delete_Favorites();
+			else if (f_menu == 3)
+				h->print_Favorites();
+			break;
+		case 8:
 			cout << "프로그램을 종료합니다.\n";
 			break;
 		}
-	} while (menu != 7);
+	} while (menu != 8);
 
 	h->delete_all();
 
