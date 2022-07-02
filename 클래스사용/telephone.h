@@ -9,6 +9,7 @@ public:
 	telepointer left;
 	string name;
 	string number;
+	bool star;
 	telepointer right;
 
 	telephone();
@@ -21,6 +22,9 @@ public:
 	void insertNode(telepointer h, string name, string number);
 	void show_member();
 	void modify(telepointer h);
+	void add_Favorites();
+	void delete_Favorites();
+	void print_Favorites();
 };
 
 #endif
